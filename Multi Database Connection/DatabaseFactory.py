@@ -20,8 +20,8 @@ class SQLDatabaseFactory(DatabaseFactory):
 class NoSQLDatabaseFactory(DatabaseFactory):
     def create_connection(self, database_type, host, port, username, password, database_name):
         if database_type == "MongoDB":
-            return MongoDBConnection()
+            return MongoDBConnection(host, port, username, password, database_name)
         elif database_type == "Redis":
-            return RedisConnection()
+            return RedisConnection(host, port, username, password, database_name)
         else:
             raise ValueError(f"Invalid database type: {database_type}")

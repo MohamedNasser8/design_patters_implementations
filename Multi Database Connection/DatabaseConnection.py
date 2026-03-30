@@ -2,6 +2,7 @@ from abc import ABC
 from abc import abstractmethod
 import mysql.connector
 import psycopg2
+import pymongo
 
 class DatabaseConnection(ABC):
     def __init__(self, host, port, username, password, database_name):
@@ -25,9 +26,6 @@ class DatabaseConnection(ABC):
     def execute(self, query):
         pass
 
-    @abstractmethod
-    def fetch(self, query):
-        pass
 
 class SQLDatabaseConnection(DatabaseConnection):
     @abstractmethod
@@ -94,10 +92,11 @@ class RedisConnection(DatabaseConnection):
 
 class MongoDBConnection(DatabaseConnection):
     def connect(self):
-        pass
+        self.connection = pymongo.MongoClient(self.host, self.port)
+        self.database = self.connection[self.database_name]
 
     def disconnect(self):
-        pass
+        self.connection.close()
 
     def execute(self, query):
-        pass
+        return self.database.execute_command(query)
