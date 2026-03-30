@@ -1,0 +1,37 @@
+from DatabaseFactory import SQLDatabaseFactory
+
+def application():
+    print("Application started")
+    database_factory = SQLDatabaseFactory()
+    # mysql_connection = database_factory.create_connection("MySQL", "localhost", 3306, "root", "password", "database_name")
+    # mysql_connection.connect()
+    # mysql_connection.execute("CREATE TABLE users (id INT, name VARCHAR(255))")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (1, 'John')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (2, 'Jane')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (3, 'Jim')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (4, 'Jill')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (5, 'Jack')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (6, 'Jill')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (7, 'Jack')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (8, 'Jill')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (9, 'Jack')")
+    # mysql_connection.execute("INSERT INTO users (id, name) VALUES (10, 'Jill')")
+    # results = mysql_connection.fetch("SELECT * FROM users")
+    # print(results)
+    # mysql_connection.disconnect()
+    postgres_connection = database_factory.create_connection("PostgreSQL", "localhost", 5432, "root", "password", "database_name")
+    postgres_connection.connect()
+    postgres_connection.execute("CREATE TABLE users (id INT, first_name VARCHAR(255), last_name VARCHAR(255))")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (1, 'Mohab', 'El-Haj')")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (2, 'Ahmed', 'Fawzy')")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (3, 'Mohamed', 'Ali')")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (4, 'Youssef', 'Ahmed')")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (5, 'Omar', 'Mostafa')")
+    postgres_connection.execute("INSERT INTO users (id, first_name, last_name) VALUES (6, 'Fathy', 'Saad')")
+    results = postgres_connection.fetch("SELECT * FROM users")
+    print(results)
+    postgres_connection.disconnect()
+
+
+if __name__ == "__main__":
+    application()
